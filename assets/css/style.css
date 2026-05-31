@@ -2029,3 +2029,32 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 .skill-cert-item strong { color: var(--white-2); font-weight: var(--fw-500); }
+
+
+/**
+ * CUSTOM — language toggle button
+ */
+
+.lang-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 30;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--border-gradient-onyx);
+  color: var(--orange-yellow-crayola);
+  font-size: 15px;
+  font-weight: var(--fw-600);
+  box-shadow: var(--shadow-2);
+  border: 1px solid var(--jet);
+  cursor: pointer;
+  transition: var(--transition-1);
+}
+
+.lang-toggle:hover { color: var(--white-2); transform: translateY(-2px); }
+
+@media (max-width: 580px) {
+  .lang-toggle { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 14px; }
+}

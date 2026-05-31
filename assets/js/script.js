@@ -17,11 +17,10 @@ if (select) select.addEventListener("click", function () { toggle(this); });
 
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
-const filterFunc = function (selectedValue) {
+// 用稳定 key（all/ai/aigc/method）筛选，与显示语言无关
+const filterFunc = function (key) {
   for (let i = 0; i < filterItems.length; i++) {
-    if (selectedValue === "全部") {
-      filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
+    if (key === "all" || key === filterItems[i].dataset.category) {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
@@ -31,19 +30,17 @@ const filterFunc = function (selectedValue) {
 
 for (let i = 0; i < selectItems.length; i++) {
   selectItems[i].addEventListener("click", function () {
-    let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     toggle(select);
-    filterFunc(selectedValue);
+    filterFunc(this.dataset.selectItem);
   });
 }
 
 let lastClickedBtn = filterBtn[0];
 for (let i = 0; i < filterBtn.length; i++) {
   filterBtn[i].addEventListener("click", function () {
-    let selectedValue = this.innerText.toLowerCase();
     if (selectValue) selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
+    filterFunc(this.dataset.filterBtn);
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
     lastClickedBtn = this;
@@ -83,13 +80,13 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && qrModal) qrModal.classList.remove("active");
 });
 
-// page navigation
+// page navigation —— 用 data-nav-link 的稳定 key 匹配 data-page，与显示语言无关
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-    const target = this.innerText.trim();
+    const target = this.dataset.navLink;
     for (let j = 0; j < pages.length; j++) {
       if (target === pages[j].dataset.page) {
         pages[j].classList.add("active");
