@@ -47,6 +47,32 @@ for (let i = 0; i < filterBtn.length; i++) {
   });
 }
 
+// light / dark theme toggle
+const themeToggle = document.querySelector("[data-theme-toggle]");
+const THEME_KEY = "site-theme";
+
+function applyTheme(theme) {
+  const isLight = theme === "light";
+  if (isLight) document.documentElement.setAttribute("data-theme", "light");
+  else document.documentElement.removeAttribute("data-theme");
+  if (themeToggle) {
+    const icon = themeToggle.querySelector("ion-icon");
+    if (icon) icon.setAttribute("name", isLight ? "moon-outline" : "sunny-outline");
+  }
+  try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+}
+
+let currentTheme = "light";
+try { currentTheme = localStorage.getItem(THEME_KEY) || "light"; } catch (e) {}
+applyTheme(currentTheme);
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    currentTheme = currentTheme === "light" ? "dark" : "light";
+    applyTheme(currentTheme);
+  });
+}
+
 // contact form validation
 const form = document.querySelector("[data-form]");
 const formInputs = document.querySelectorAll("[data-form-input]");

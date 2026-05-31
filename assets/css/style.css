@@ -1859,6 +1859,13 @@ textarea.form-input::-webkit-resizer { display: none; }
     text-overflow: ellipsis;
   }
 
+  .contact-info .contact-link-wrap {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    line-height: 1.4;
+  }
+
   .contact-info :is(.contact-link, time, address) {
     --fs-7: 14px;
     font-weight: var(--fw-300);
@@ -2032,14 +2039,17 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 
 /**
- * CUSTOM — language toggle button
+ * CUSTOM — language & theme toggle buttons
  */
 
-.lang-toggle {
+.lang-toggle,
+.theme-toggle {
   position: fixed;
   top: 16px;
-  right: 16px;
   z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
   border-radius: 12px;
@@ -2047,14 +2057,80 @@ textarea.form-input::-webkit-resizer { display: none; }
   color: var(--orange-yellow-crayola);
   font-size: 15px;
   font-weight: var(--fw-600);
+  line-height: 1;
   box-shadow: var(--shadow-2);
   border: 1px solid var(--jet);
   cursor: pointer;
   transition: var(--transition-1);
 }
 
-.lang-toggle:hover { color: var(--white-2); transform: translateY(-2px); }
+.lang-toggle { right: 16px; }
+.theme-toggle { right: 68px; }
+.theme-toggle ion-icon { font-size: 20px; }
+
+.lang-toggle:hover,
+.theme-toggle:hover { color: var(--white-2); transform: translateY(-2px); }
 
 @media (max-width: 580px) {
-  .lang-toggle { top: 12px; right: 12px; width: 40px; height: 40px; font-size: 14px; }
+  .lang-toggle,
+  .theme-toggle { top: 12px; width: 40px; height: 40px; font-size: 14px; }
+  .lang-toggle { right: 12px; }
+  .theme-toggle { right: 60px; }
+  .theme-toggle ion-icon { font-size: 18px; }
+}
+
+
+/**
+ * CUSTOM — light (day) theme
+ */
+
+html[data-theme="light"] {
+  --bg-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 97%) 3%,
+    hsl(0, 0%, 90%) 97%
+  );
+  --bg-gradient-jet: linear-gradient(
+    to bottom right,
+    hsla(0, 0%, 88%, 0.4) 0%,
+    hsla(0, 0%, 95%, 0) 100%
+  ), hsl(0, 0%, 100%);
+  --bg-gradient-yellow-2: linear-gradient(
+    135deg,
+    hsla(45, 100%, 60%, 0.2) 0%,
+    hsla(35, 100%, 58%, 0) 59.86%
+  ), hsl(0, 0%, 100%);
+  --border-gradient-onyx: linear-gradient(
+    to bottom right,
+    hsl(0, 0%, 82%) 0%,
+    hsla(0, 0%, 82%, 0) 50%
+  );
+  --text-gradient-yellow: linear-gradient(
+    to right,
+    hsl(38, 92%, 48%),
+    hsl(32, 95%, 46%)
+  );
+
+  --jet: hsl(0, 0%, 85%);
+  --onyx: hsl(0, 0%, 92%);
+  --eerie-black-1: hsl(0, 0%, 100%);
+  --eerie-black-2: hsl(0, 0%, 100%);
+  --smoky-black: hsl(0, 0%, 94%);
+  --white-1: hsl(0, 0%, 13%);
+  --white-2: hsl(0, 0%, 18%);
+  --orange-yellow-crayola: hsl(38, 92%, 46%);
+  --vegas-gold: hsl(40, 60%, 45%);
+  --light-gray: hsl(0, 0%, 32%);
+  --light-gray-70: hsla(0, 0%, 32%, 0.78);
+
+  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.08);
+  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.08);
+  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.08);
+  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.06);
+  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.08);
+}
+
+html[data-theme="light"] .navbar {
+  background: hsla(0, 0%, 100%, 0.85);
+  border-top: 1px solid var(--jet);
 }
