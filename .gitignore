@@ -1,0 +1,9 @@
+# 本地预览配置
+.claude/
+
+# 证件照原图备份（4MB，站点用压缩版 photo.jpg 即可）
+assets/images/photo-original.jpg
+
+# 系统文件
+.DS_Store
+Thumbs.db
